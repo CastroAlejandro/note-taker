@@ -39,7 +39,7 @@ fs.readFile("./db/db.json", "utf8", (err, data) => {
 	//grab new note (text and title) that was saved
 	var savedNote = req.body
 	
-	console.log(JSON.stringify(req.body) + "este es")
+	console.log(JSON.stringify(req.body))
 	//add new note to temp array
 	notes.push(savedNote)
 	//run writefile function to634 add to notes array
