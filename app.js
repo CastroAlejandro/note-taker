@@ -22,6 +22,19 @@ fs.readFile("./db/db.json", "utf8", (err, data) => {
 	console.log(notes)
   });
 
+  //routes created
+  app.get("/", function(req, res) {
+	res.sendFile(path.join(__dirname, "/public/index.html"));
+  });
+  
+  app.get("/notes", function(req, res) {
+	res.sendFile(path.join(__dirname, "/public/notes.html"));
+  });
+
+  app.get("/api/notes", function(req, res) {
+	return res.json(notes);
+  });
+
 
 
 app.listen(PORT, function() {
