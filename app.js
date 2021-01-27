@@ -35,7 +35,36 @@ fs.readFile("./db/db.json", "utf8", (err, data) => {
 	return res.json(notes);
   });
 
+  app.post("/api/notes", function(req,res){
+	//grab new note (text and title) that was saved
+	var savedNote = req.body
+	
+	console.log(JSON.stringify(req.body) + "este es")
+	//add new note to temp array
+	notes.push(savedNote)
+	//run writefile function to634 add to notes array
+	createJSON();
+})
 
+
+app.get("/api/notes/:id", function (req, res) {
+    // display json for the notes array indices of the provided id
+    res.json(notes[req.params.id]);
+  });
+  // Deletes a note with id
+app.delete("/api/notes/:id", function (req, res) {
+	
+    notes.splice(req.params.id, 1);
+	createJSON();
+	console.log("Del note with id " + req.params.id);
+	});
+
+function createJSON() {
+	fs.writeFile("./db/db.json", JSON.stringify(notes), (err) => {
+		if (err) throw err;
+		return true
+	  });
+}
 
 app.listen(PORT, function() {
 	console.log("App listening on PORT " + PORT);
