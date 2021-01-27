@@ -6,6 +6,7 @@ const $noteList = $(".list-container .list-group");
 
 // activeNote is used to keep track of the note in the textarea
 let activeNote = {};
+let yolo = 0
 
 // A function for getting all notes from the db
 const getNotes = () => {
@@ -53,13 +54,14 @@ const renderActiveNote = () => {
 const handleNoteSave = function () {
   const newNote = {
     title: $noteTitle.val(),
-    text: $noteText.val(),
+	text: $noteText.val(),
+	id: yolo,
   };
 
-  saveNote(newNote).then(() => {
+  saveNote(newNote)
     getAndRenderNotes();
     renderActiveNote();
-  });
+
 };
 
 // Delete the clicked note
@@ -73,10 +75,10 @@ const handleNoteDelete = function (event) {
     activeNote = {};
   }
 
-  deleteNote(note.id).then(() => {
+  deleteNote(note.id)
     getAndRenderNotes();
     renderActiveNote();
-  });
+
 };
 
 // Sets the activeNote and displays it
@@ -106,7 +108,7 @@ const renderNoteList = (notes) => {
   $noteList.empty();
 
   const noteListItems = [];
-
+	yolo = notes.length;
   // Returns jquery object for li with given text and delete button
   // unless withDeleteButton argument is provided as false
   const create$li = (text, withDeleteButton = true) => {
@@ -127,9 +129,12 @@ const renderNoteList = (notes) => {
     noteListItems.push(create$li("No saved Notes", false));
   }
 
+  var list = -1;
+
   notes.forEach((note) => {
-    const $li = create$li(note.title).data(note);
-    noteListItems.push($li);
+	  list++
+	  const $li = create$li(note.title).data(note).data("id",list);
+	  noteListItems.push($li);
   });
 
   $noteList.append(noteListItems);
@@ -146,6 +151,7 @@ $newNoteBtn.on("click", handleNewNoteView);
 $noteList.on("click", ".delete-note", handleNoteDelete);
 $noteTitle.on("keyup", handleRenderSaveBtn);
 $noteText.on("keyup", handleRenderSaveBtn);
+
 
 // Gets and renders the initial list of notes
 getAndRenderNotes();
