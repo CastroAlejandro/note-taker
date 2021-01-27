@@ -2,9 +2,6 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Preview
-
-
 ## Description
 
 The application allows the user to take notes with a title and description and add them to a list. The purpose of the assignment was to demonstrate the use of express.js, node.js, and heroku to create a note creator using command line applications.
@@ -45,6 +42,9 @@ You may not contribute to the repo at this time.
 
     npm test
 
+## Preview
+
+[watch the gif!](./public/assets/NotTaker.gif)
 
 ## Questions
 ​
